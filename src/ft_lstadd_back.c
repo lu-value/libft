@@ -15,21 +15,21 @@
 /**
  * ft_lstadd_back - adds node at list end
  * @lst: pointer to list head
- * @new: node to add
+ * @new_node: node to add
  */
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_list **lst, t_list *new_node)
 {
 	t_list	*tmp;
 
-	if (!lst || !new)
+	if (!lst || !new_node)
 		return ;
 	if (!(*lst))
 	{
-		*lst = new;
+		*lst = new_node;
 		return ;
 	}
 	tmp = *lst;
 	while (tmp->next)
 		tmp = tmp->next;
-	tmp->next = new;
+	tmp->next = new_node;
 }
