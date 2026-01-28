@@ -78,7 +78,7 @@ char	*ft_gnl(int fd)
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	while (!ft_strchr(stash, '\n'))
+	while (!stash || !ft_strchr(stash, '\n'))
 	{
 		bytes = read(fd, buffer, BUFFER_SIZE);
 		if (bytes == -1)
