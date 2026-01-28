@@ -1,13 +1,3 @@
-# libft
-
-<div align="center">
-
-*My personal C library, developed as part of my 42 curriculum.*
-
-</div>
-
----
-
 ## Description
 
 > [!NOTE]
