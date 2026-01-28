@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/**
+ * ft_strlen - calculates string length
+ * @s: pointer to string
+ * Return: number of chars before '\0'
+ */
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;

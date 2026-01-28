@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/**
+ * ft_itoa - converts int to string
+ * @n: integer to convert
+ * Return: new allocated string or NULL
+ */
 static size_t	get_length(long n)
 {
 	size_t	len;

@@ -12,6 +12,13 @@
 
 #include "libft.h"
 
+/**
+ * ft_strlcat - concatenates src to dst with size limit
+ * @dst: destination buffer
+ * @src: source string
+ * @dstsize: size of dst buffer
+ * Return: total length attempted
+ */
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	dst_len;

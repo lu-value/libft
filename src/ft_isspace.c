@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/**
+ * ft_isspace - checks if c is whitespace
+ * @c: character to check
+ * Return: 1 if whitespace, 0 otherwise
+ */
 int	ft_isspace(int c)
 {
 	if (c == ' ' || c == '\f' || c == '\n' || c == '\r'

@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/**
+ * ft_strdup - duplicates string
+ * @s: string to duplicate
+ * Return: new allocated string or NULL
+ */
 char	*ft_strdup(const char *s)
 {
 	size_t	len;

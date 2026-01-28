@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/**
+ * ft_lstadd_front - adds node at list start
+ * @lst: pointer to list head
+ * @new: node to add
+ */
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	if (!lst || !new)

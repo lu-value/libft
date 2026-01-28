@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+/**
+ * ft_strjoin - joins two strings
+ * @s1: first string
+ * @s2: second string
+ * Return: new allocated string or NULL
+ */
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	len1;

@@ -12,6 +12,13 @@
 
 #include "libft.h"
 
+/**
+ * ft_memset - fills memory with byte c
+ * @b: pointer to memory
+ * @c: byte value to set
+ * @len: number of bytes
+ * Return: pointer to b
+ */
 void	*ft_memset(void *b, int c, size_t len)
 {
 	size_t			i;

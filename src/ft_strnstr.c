@@ -12,6 +12,13 @@
 
 #include "libft.h"
 
+/**
+ * ft_strnstr - finds needle in haystack within len bytes
+ * @haystack: string to search in
+ * @needle: string to find
+ * @len: max bytes to search
+ * Return: pointer to match or NULL
+ */
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;

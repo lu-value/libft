@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/**
+ * ft_lstnew - creates new list node
+ * @content: content for the node
+ * Return: new node or NULL
+ */
 t_list	*ft_lstnew(void *content)
 {
 	t_list	*lst;

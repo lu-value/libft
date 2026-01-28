@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+/**
+ * ft_strchr - finds first occurrence of c in s
+ * @s: string to search
+ * @c: character to find
+ * Return: pointer to char or NULL
+ */
 char	*ft_strchr(const char *s, int c)
 {
 	unsigned char	target;

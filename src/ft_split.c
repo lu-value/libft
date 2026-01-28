@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+/**
+ * ft_split - splits string by delimiter
+ * @s: string to split
+ * @c: delimiter char
+ * Return: array of strings or NULL
+ */
 unsigned int	in_charset(char s, char c)
 {
 	if (s == c)

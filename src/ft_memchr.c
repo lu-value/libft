@@ -12,6 +12,13 @@
 
 #include "libft.h"
 
+/**
+ * ft_memchr - finds byte in memory
+ * @s: memory to search
+ * @c: byte to find
+ * @n: number of bytes to search
+ * Return: pointer to byte or NULL
+ */
 void	*ft_memchr(const void *s, int c, size_t n)
 {
 	const unsigned char	*ptr;

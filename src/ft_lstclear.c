@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/**
+ * ft_lstclear - deletes entire list
+ * @lst: pointer to list head
+ * @del: function to delete content
+ */
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*tmp;

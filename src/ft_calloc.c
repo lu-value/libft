@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+/**
+ * ft_calloc - allocates and zeroes memory
+ * @count: number of elements
+ * @size: size of each element
+ * Return: pointer to memory or NULL
+ */
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*ptr;

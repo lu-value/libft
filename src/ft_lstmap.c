@@ -12,6 +12,13 @@
 
 #include "libft.h"
 
+/**
+ * ft_lstmap - creates new list by applying f
+ * @lst: source list
+ * @f: function to apply
+ * @del: function to delete on error
+ * Return: new list or NULL
+ */
 static void	*free_and_return_null(t_list **result, void (*del)(void *))
 {
 	if (result)

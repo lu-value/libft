@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/**
+ * ft_putnbr_fd - writes integer to fd
+ * @n: integer to write
+ * @fd: file descriptor
+ */
 void	ft_putnbr_fd(int n, int fd)
 {
 	char	buf[12];

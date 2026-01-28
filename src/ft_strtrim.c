@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+/**
+ * ft_strtrim - trims chars from set at start/end
+ * @s1: string to trim
+ * @set: chars to remove
+ * Return: new trimmed string or NULL
+ */
 static void	build_lookup(const char *set, bool lookup[256])
 {
 	size_t	i;

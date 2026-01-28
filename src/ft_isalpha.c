@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/**
+ * ft_isalpha - checks if c is a letter
+ * @c: character to check
+ * Return: 1 if letter, 0 otherwise
+ */
 int	ft_isalpha(int c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))

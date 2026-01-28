@@ -12,6 +12,13 @@
 
 #include "libft.h"
 
+/**
+ * ft_substr - extracts substring from s
+ * @s: source string
+ * @start: start index
+ * @len: max length
+ * Return: new allocated substring or NULL
+ */
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	s_len;

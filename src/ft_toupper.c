@@ -10,6 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * ft_toupper - converts lowercase to uppercase
+ * @c: character to convert
+ * Return: uppercase char or c unchanged
+ */
 int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')

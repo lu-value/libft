@@ -12,6 +12,13 @@
 
 #include "libft.h"
 
+/**
+ * ft_memcpy - copies memory (no overlap)
+ * @dst: destination
+ * @src: source
+ * @len: number of bytes
+ * Return: pointer to dst
+ */
 void	*ft_memcpy(void *dst, const void *src, size_t len)
 {
 	size_t				i;

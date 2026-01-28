@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/**
+ * ft_lstadd_back - adds node at list end
+ * @lst: pointer to list head
+ * @new: node to add
+ */
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*tmp;

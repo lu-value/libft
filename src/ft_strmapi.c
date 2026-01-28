@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+/**
+ * ft_strmapi - applies f to each char, returns new string
+ * @s: source string
+ * @f: function to apply
+ * Return: new string or NULL
+ */
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	char	*dest;

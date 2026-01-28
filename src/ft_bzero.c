@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/**
+ * ft_bzero - sets memory to zero
+ * @b: pointer to memory
+ * @len: number of bytes
+ */
 void	ft_bzero(void *b, size_t len)
 {
 	ft_memset(b, 0, len);

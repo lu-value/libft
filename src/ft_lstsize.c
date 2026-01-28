@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/**
+ * ft_lstsize - counts list nodes
+ * @lst: list head
+ * Return: number of nodes
+ */
 int	ft_lstsize(t_list *lst)
 {
 	int	i;

@@ -12,6 +12,13 @@
 
 #include "libft.h"
 
+/**
+ * ft_memmove - copies memory (handles overlap)
+ * @dest: destination
+ * @src: source
+ * @n: number of bytes
+ * Return: pointer to dest
+ */
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	unsigned char		*d;
