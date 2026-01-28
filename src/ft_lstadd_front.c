@@ -15,12 +15,12 @@
 /**
  * ft_lstadd_front - adds node at list start
  * @lst: pointer to list head
- * @new: node to add
+ * @new_node: node to add
  */
-void	ft_lstadd_front(t_list **lst, t_list *new)
+void	ft_lstadd_front(t_list **lst, t_list *new_node)
 {
-	if (!lst || !new)
+	if (!lst || !new_node)
 		return ;
-	new->next = *lst;
-	*lst = new;
+	new_node->next = *lst;
+	*lst = new_node;
 }
