@@ -61,3 +61,9 @@ cc main.c -L. -lft -I includes
 > - **Write your own code**
 >
 > The purpose of the libft project is to learn. Copying deprives you of this learning and you will be stuck on future projects.
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
