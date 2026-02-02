@@ -65,6 +65,8 @@ fclean: clean
 	@rm -f $(NAME)
 	@echo "$(GREEN)Full clean complete!$(RESET)"
 
-re: fclean all
+re:
+	@$(MAKE) fclean
+	@$(MAKE) all
 
 .PHONY: all clean fclean re
