@@ -12,12 +12,12 @@
 
 #include "../includes/libft.h"
 /**
- * ps_get_bit - returns the value of a specific bit in an integer
+ * ft_get_bit - returns the value of a specific bit in an integer
  * @num: the number from which to extract the bit
  * @bit: position of the bit to get (starting from the right, 0-based)
  * Return: 0 if the bit is 0, 1 if the bit is 1
  */
-int	ps_get_bit(int num, int bit)
+int	ft_get_bit(int num, int bit)
 {
 	return ((num >> bit) & 1);
 }
