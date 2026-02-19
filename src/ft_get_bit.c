@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/libft.h"
 /**
  * ps_get_bit - returns the value of a specific bit in an integer
  * @num: the number from which to extract the bit
