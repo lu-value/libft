@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lm0uta <lmouta-g@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lmouta-g <lmouta-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 13:48:18 by lm0uta            #+#    #+#             */
-/*   Updated: 2025/11/14 15:47:26 by lm0uta           ###   ########.fr       */
+/*   Updated: 2026/02/19 12:08:25 by lmouta-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void			*ft_memmove(void *dst, const void *src, size_t len);
 void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t len);
 void			*ft_calloc(size_t count, size_t size);
+int				ft_get_bit(int num, int bit);
+
 
 void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);
