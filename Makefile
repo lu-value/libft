@@ -48,7 +48,13 @@ lib-arch: clean
 	@ar -rsc libft_$(ARCH).a $(OBJS)
 	@echo "$(GREEN)libft_$(ARCH).a built.$(RESET)"
 
-# Build universal lib (macOS)
+# Build standard single-arch lib (default)
+$(NAME): $(OBJS)
+	@echo "$(YELLOW)Building $(NAME)...$(RESET)"
+	@ar rcs $(NAME) $(OBJS)
+	@echo "$(GREEN)$(NAME) built.$(RESET)"
+
+# Build universal lib (macOS only)
 universal: clean
 	@echo "$(YELLOW)Building universal libft for macOS...$(RESET)"
 	@for ARCH in $(ARCHS); do \
@@ -59,7 +65,7 @@ universal: clean
 	@echo "$(GREEN)libft.a universal created!$(RESET)"
 
 # Default all
-all: universal
+all: $(NAME)
 
 clean:
 	@echo "$(YELLOW)Cleaning object files...$(RESET)"
