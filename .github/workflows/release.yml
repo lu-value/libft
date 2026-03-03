@@ -15,10 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build libft Linux
-        run: make -C libft fclean linux
-
-      - name: Build push_swap Linux
-        run: make fclean all
+        run: make fclean linux
 
       - name: Create Linux Release
         uses: softprops/action-gh-release@v1
@@ -26,9 +23,8 @@ jobs:
           tag_name: v1.0.${{ github.run_number }}-linux
           name: Release v1.0.${{ github.run_number }}-linux
           files: |
-            libft/libft.a
+            libft.a
             includes/libft.h
-            push_swap
 
   build-macos:
     runs-on: macos-latest
@@ -37,11 +33,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build libft macOS universal
-        # Utilise le Makefile multi-arch pour créer libft universelle arm64+x86_64
-        run: make -C libft fclean universal
-
-      - name: Build push_swap macOS
-        run: make fclean all
+        run: make fclean universal
 
       - name: Create macOS Release
         uses: softprops/action-gh-release@v1
@@ -49,6 +41,5 @@ jobs:
           tag_name: v1.0.${{ github.run_number }}-mac
           name: Release v1.0.${{ github.run_number }}-mac
           files: |
-            libft/libft.a
+            libft.a
             includes/libft.h
-            push_swap
