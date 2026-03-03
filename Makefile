@@ -40,11 +40,8 @@ ARCHS ?= arm64 x86_64
 	@$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
 # Build lib for a single arch
-lib-arch: clean
+lib-arch: clean $(OBJS)
 	@echo "$(YELLOW)Compiling libft for $(ARCH)...$(RESET)"
-	@for file in $(OBJS); do \
-		: ; \
-	done
 	@ar -rsc libft_$(ARCH).a $(OBJS)
 	@echo "$(GREEN)libft_$(ARCH).a built.$(RESET)"
 
