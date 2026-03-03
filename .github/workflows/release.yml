@@ -11,15 +11,12 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Build libft Linux
-        run: make -C libft fclean all
-
+        run: |
+          make -C libft fclean all
       - name: Build push_swap Linux
         run: make fclean all
-
       - name: Create Linux Release
         uses: softprops/action-gh-release@v1
         with:
@@ -32,16 +29,20 @@ jobs:
 
   build-macos:
     runs-on: macos-latest
+    strategy:
+      matrix:
+        arch: [arm64, x86_64]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Build libft macOS universal
-        run: make -C libft fclean all
-
+      - uses: actions/checkout@v4
+      - name: Build libft macOS ${{ matrix.arch }}
+        run: make -C libft fclean all ARCH=${{ matrix.arch }}
+      - name: Combine universal lib (only once)
+        if: matrix.arch == 'arm64'
+        run: |
+          make -C libft fclean all ARCH=x86_64
+          lipo -create libft/libft_arm64.a libft/libft_x86_64.a -output libft/libft.a
       - name: Build push_swap macOS
         run: make fclean all
-
       - name: Create macOS Release
         uses: softprops/action-gh-release@v1
         with:
