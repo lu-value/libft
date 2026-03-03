@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build libft Linux
-        run: make -C libft fclean all
+        run: make -C libft fclean linux
 
       - name: Build push_swap Linux
         run: make fclean all
