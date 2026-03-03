@@ -32,6 +32,9 @@ PURPLE = \033[0;35m
 RESET = \033[0m
 BOLD = \033[1m
 
+# Detect OS
+OS := $(shell uname -s)
+
 # List of architectures for macOS universal
 ARCHS ?= arm64 x86_64
 
@@ -39,24 +42,31 @@ ARCHS ?= arm64 x86_64
 %.o: %.c
 	@$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
-# Build lib for a single arch
-lib-arch: clean $(OBJS)
-	@echo "$(YELLOW)Compiling libft for $(ARCH)...$(RESET)"
-	@ar -rsc libft_$(ARCH).a $(OBJS)
-	@echo "$(GREEN)libft_$(ARCH).a built.$(RESET)"
+# Default all: auto-detect OS
+all:
+ifeq ($(OS),Darwin)
+	@$(MAKE) universal
+else
+	@$(MAKE) linux
+endif
 
-# Build universal lib (macOS)
-universal: clean
+# Linux build: standard static library
+linux: $(OBJS)
+	@echo "$(YELLOW)Building libft for Linux...$(RESET)"
+	@ar -rsc $(NAME) $(OBJS)
+	@echo "$(GREEN)$(NAME) built for Linux.$(RESET)"
+
+# Build universal lib (macOS) with proper per-arch compilation
+universal: fclean
 	@echo "$(YELLOW)Building universal libft for macOS...$(RESET)"
-	@for ARCH in $(ARCHS); do \
-		$(MAKE) lib-arch ARCH=$$ARCH; \
+	@for arch in $(ARCHS); do \
+		$(MAKE) $(OBJS) CFLAGS="$(CFLAGS) -arch $$arch"; \
+		ar -rsc libft_$$arch.a $(OBJS); \
+		rm -f $(OBJS); \
 	done
-	@lipo -create $(foreach a,$(ARCHS),libft_$(a).a) -output libft.a
+	@lipo -create $(foreach a,$(ARCHS),libft_$(a).a) -output $(NAME)
 	@rm -f $(foreach a,$(ARCHS),libft_$(a).a)
-	@echo "$(GREEN)libft.a universal created!$(RESET)"
-
-# Default all
-all: universal
+	@echo "$(GREEN)$(NAME) universal created!$(RESET)"
 
 clean:
 	@echo "$(YELLOW)Cleaning object files...$(RESET)"
@@ -70,4 +80,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re universal lib-arch
+.PHONY: all clean fclean re universal linux
