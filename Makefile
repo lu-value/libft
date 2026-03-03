@@ -8,6 +8,7 @@ NAME = libft.a
 
 SRC_DIR = src
 INC_DIR = includes
+BUILD_DIR = build
 
 SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
        ft_isascii.c ft_isdigit.c ft_isprint.c ft_isspace.c ft_memchr.c \
@@ -35,35 +36,46 @@ BOLD = \033[1m
 # List of architectures for macOS universal
 ARCHS ?= arm64 x86_64
 
-# Compile one arch
+# Arch-specific object paths (evaluated lazily so ARCH can be set per invocation)
+ARCH_OBJS = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/$(ARCH)/%.o,$(SRCS))
+
+# Default: portable single-arch build
 %.o: %.c
 	@$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
-# Build lib for a single arch
-lib-arch: clean
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	@echo "$(YELLOW)Creating $(NAME)...$(RESET)"
+	@ar -rsc $(NAME) $(OBJS)
+	@echo "$(GREEN)$(NAME) created successfully!$(RESET)"
+
+# macOS-only: arch-specific object rule (uses -arch flag, separate build directory per arch)
+$(BUILD_DIR)/$(ARCH)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(BUILD_DIR)/$(ARCH)
+	@$(CC) $(CFLAGS) -I$(INC_DIR) -arch $(ARCH) -c $< -o $@
+
+# macOS-only: build static lib for a single arch; requires ARCH to be set
+lib-arch: $(ARCH_OBJS)
 	@echo "$(YELLOW)Compiling libft for $(ARCH)...$(RESET)"
-	@for file in $(OBJS); do \
-		: ; \
-	done
-	@ar -rsc libft_$(ARCH).a $(OBJS)
+	@ar -rsc libft_$(ARCH).a $(ARCH_OBJS)
 	@echo "$(GREEN)libft_$(ARCH).a built.$(RESET)"
 
-# Build universal lib (macOS)
-universal: clean
+# Build universal lib (macOS only)
+universal:
 	@echo "$(YELLOW)Building universal libft for macOS...$(RESET)"
 	@for ARCH in $(ARCHS); do \
 		$(MAKE) lib-arch ARCH=$$ARCH; \
 	done
 	@lipo -create $(foreach a,$(ARCHS),libft_$(a).a) -output libft.a
 	@rm -f $(foreach a,$(ARCHS),libft_$(a).a)
+	@rm -rf $(BUILD_DIR)
 	@echo "$(GREEN)libft.a universal created!$(RESET)"
-
-# Default all
-all: universal
 
 clean:
 	@echo "$(YELLOW)Cleaning object files...$(RESET)"
 	@rm -f $(OBJS)
+	@rm -rf $(BUILD_DIR)
 	@echo "$(GREEN)Clean complete.$(RESET)"
 
 fclean: clean
