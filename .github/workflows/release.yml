@@ -8,23 +8,47 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  build-linux:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Build libft
-        run: make
-
-      - name: Create Release
+      - uses: actions/checkout@v4
+      - name: Build libft Linux
+        run: |
+          make -C libft fclean all
+      - name: Build push_swap Linux
+        run: make fclean all
+      - name: Create Linux Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v1.0.${{ github.run_number }}
-          name: Release v1.0.${{ github.run_number }}
+          tag_name: v1.0.${{ github.run_number }}-linux
+          name: Release v1.0.${{ github.run_number }}-linux
           files: |
-            libft.a
+            libft/libft.a
             includes/libft.h
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            push_swap
+
+  build-macos:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        arch: [arm64, x86_64]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build libft macOS ${{ matrix.arch }}
+        run: make -C libft fclean all ARCH=${{ matrix.arch }}
+      - name: Combine universal lib (only once)
+        if: matrix.arch == 'arm64'
+        run: |
+          make -C libft fclean all ARCH=x86_64
+          lipo -create libft/libft_arm64.a libft/libft_x86_64.a -output libft/libft.a
+      - name: Build push_swap macOS
+        run: make fclean all
+      - name: Create macOS Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v1.0.${{ github.run_number }}-mac
+          name: Release v1.0.${{ github.run_number }}-mac
+          files: |
+            libft/libft.a
+            includes/libft.h
+            push_swap
