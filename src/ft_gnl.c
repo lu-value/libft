@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_gnl.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmouta-g <lmouta-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lu-value <lu-value@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:18:23 by lm0uta            #+#    #+#             */
-/*   Updated: 2025/12/19 14:26:07 by lmouta-g         ###   ########.fr       */
+/*   Updated: 2026/03/04 11:18:02 by lu-value         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,7 @@ char	*ft_gnl(int fd)
 		if (!stash)
 			return (free(buffer), NULL);
 	}
-	free(buffer);
 	line = extract_line(stash);
 	stash = update_stash(stash);
-	return (line);
+	return (free(buffer), line);
 }
