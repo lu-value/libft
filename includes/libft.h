@@ -24,6 +24,22 @@
 #  define BUFFER_SIZE 42
 # endif
 
+# define CONSOLE_COLOR_RESET "\033[0m"
+# define CONSOLE_COLOR_DEBUG "\033[0;36m"
+# define CONSOLE_COLOR_INFO "\033[0;34m"
+# define CONSOLE_COLOR_WARN "\033[0;33m"
+# define CONSOLE_COLOR_ERROR "\033[0;31m"
+# define CONSOLE_COLOR_SUCCESS "\033[0;32m"
+
+typedef enum e_console_type
+{
+	CONSOLE_DEBUG,
+	CONSOLE_INFO,
+	CONSOLE_WARN,
+	CONSOLE_ERROR,
+	CONSOLE_SUCCESS
+}	t_console_type;
+
 typedef struct s_list
 {
 	void			*content;
@@ -254,7 +270,6 @@ void			*ft_calloc(size_t count, size_t size);
  */
 int				ft_get_bit(int num, int bit);
 
-
 /**
  * ft_putchar_fd - writes char to fd
  * @c: character to write
@@ -279,6 +294,13 @@ void			ft_putendl_fd(char *s, int fd);
  * @fd: file descriptor
  */
 void			ft_putnbr_fd(int n, int fd);
+/**
+ * write_console - writes a colored log prefix and a formatted message
+ * @type: console log type
+ * @format: printf-style message format
+ * Return: number of bytes written, or -1 on error
+ */
+int				write_console(t_console_type type, const char *format, ...);
 /**
  * ft_printf - prints formatted output to stdout
  * @format: format string

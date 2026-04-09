@@ -65,43 +65,45 @@ static char	*update_stash(char *stash)
 	return (new_stash);
 }
 
+static int	read_into_stash(int fd, char *buffer, char **stash)
+{
+	ssize_t	bytes;
+
+	bytes = read(fd, buffer, BUFFER_SIZE);
+	if (bytes == -1)
+	{
+		free(*stash);
+		*stash = NULL;
+		return (-1);
+	}
+	if (bytes == 0)
+		return (0);
+	buffer[bytes] = '\0';
+	*stash = gnl_strjoin(*stash, buffer);
+	if (!*stash)
+		return (-1);
+	return (1);
+}
+
 char	*ft_gnl(int fd)
 {
 	static char	*stash[OPEN_MAX];
 	char		*buffer;
-	ssize_t		bytes;
 	char		*line;
-	char		*current_stash;
+	int			status;
 
 	if (fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	current_stash = stash[fd];
-	while (!current_stash || !ft_strchr(current_stash, '\n'))
-	{
-		bytes = read(fd, buffer, BUFFER_SIZE);
-		if (bytes == -1)
-		{
-			free(buffer);
-			free(current_stash);
-			stash[fd] = NULL;
-			return (NULL);
-		}
-		if (bytes == 0)
-			break ;
-		buffer[bytes] = '\0';
-		current_stash = gnl_strjoin(current_stash, buffer);
-		if (!current_stash)
-		{
-			free(buffer);
-			stash[fd] = NULL;
-			return (NULL);
-		}
-	}
-	line = extract_line(current_stash);
-	stash[fd] = update_stash(current_stash);
+	status = 1;
+	while (status > 0 && (!stash[fd] || !ft_strchr(stash[fd], '\n')))
+		status = read_into_stash(fd, buffer, &stash[fd]);
+	if (status < 0)
+		return (free(buffer), NULL);
+	line = extract_line(stash[fd]);
+	stash[fd] = update_stash(stash[fd]);
 	free(buffer);
 	return (line);
 }

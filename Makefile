@@ -20,7 +20,7 @@ SRCS = stdlib/ft_atoi.c memory/ft_bzero.c stdlib/ft_calloc.c \
        string/ft_substr.c string/ft_strjoin.c string/ft_strtrim.c \
        string/ft_split.c stdlib/ft_itoa.c string/ft_strmapi.c \
        string/ft_striteri.c io/ft_putchar_fd.c io/ft_putstr_fd.c \
-       io/ft_putendl_fd.c io/ft_putnbr_fd.c list/ft_lstnew.c \
+       io/ft_putendl_fd.c io/ft_putnbr_fd.c io/write_console.c list/ft_lstnew.c \
        list/ft_lstadd_front.c list/ft_lstsize.c list/ft_lstlast.c \
        list/ft_lstadd_back.c list/ft_lstdelone.c list/ft_lstclear.c \
        list/ft_lstiter.c list/ft_lstmap.c io/ft_gnl.c \
