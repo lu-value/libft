@@ -1,5 +1,5 @@
 # ===============================
-# Makefile libft multi-build
+# Makefile libft linux build
 # ===============================
 
 CC = cc
@@ -9,17 +9,25 @@ NAME = libft.a
 SRC_DIR = src
 INC_DIR = includes
 
-SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
-       ft_isascii.c ft_isdigit.c ft_isprint.c ft_isspace.c ft_memchr.c \
-       ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_strchr.c \
-       ft_strdup.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c \
-       ft_strnstr.c ft_strrchr.c ft_tolower.c ft_toupper.c \
-       ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c \
-       ft_itoa.c ft_strmapi.c ft_striteri.c ft_putchar_fd.c \
-       ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-       ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
-       ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c \
-       ft_gnl.c
+SRCS = stdlib/ft_atoi.c memory/ft_bzero.c stdlib/ft_calloc.c \
+       ctype/ft_isalnum.c ctype/ft_isalpha.c ctype/ft_isascii.c \
+       ctype/ft_isdigit.c ctype/ft_isprint.c ctype/ft_isspace.c \
+       memory/ft_memchr.c memory/ft_memcmp.c memory/ft_memcpy.c \
+       memory/ft_memmove.c memory/ft_memset.c string/ft_strchr.c \
+       string/ft_strdup.c string/ft_strlcat.c string/ft_strlcpy.c \
+       string/ft_strlen.c string/ft_strncmp.c string/ft_strnstr.c \
+       string/ft_strrchr.c ctype/ft_tolower.c ctype/ft_toupper.c \
+       string/ft_substr.c string/ft_strjoin.c string/ft_strtrim.c \
+       string/ft_split.c stdlib/ft_itoa.c string/ft_strmapi.c \
+       string/ft_striteri.c io/ft_putchar_fd.c io/ft_putstr_fd.c \
+       io/ft_putendl_fd.c io/ft_putnbr_fd.c list/ft_lstnew.c \
+       list/ft_lstadd_front.c list/ft_lstsize.c list/ft_lstlast.c \
+       list/ft_lstadd_back.c list/ft_lstdelone.c list/ft_lstclear.c \
+       list/ft_lstiter.c list/ft_lstmap.c io/ft_gnl.c \
+       printf/ft_printf.c printf/ft_putchar.c printf/ft_puthexa.c \
+       printf/ft_putnbr.c printf/ft_putpointer.c printf/ft_putstr.c \
+       printf/ft_putunsigned.c \
+       extra/ft_get_bit.c
 
 SRCS := $(addprefix $(SRC_DIR)/,$(SRCS))
 OBJS = $(SRCS:.c=.o)
@@ -32,23 +40,12 @@ PURPLE = \033[0;35m
 RESET = \033[0m
 BOLD = \033[1m
 
-# Detect OS
-OS := $(shell uname -s)
-
-# List of architectures for macOS universal
-ARCHS ?= arm64 x86_64
-
-# Compile one arch
+# Compile sources
 %.o: %.c
 	@$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
-# Default all: auto-detect OS
-all:
-ifeq ($(OS),Darwin)
-	@$(MAKE) universal
-else
-	@$(MAKE) linux
-endif
+# Default build
+all: linux
 
 # Linux build: standard static library
 linux: $(OBJS)
@@ -56,28 +53,16 @@ linux: $(OBJS)
 	@ar -rsc $(NAME) $(OBJS)
 	@echo "$(GREEN)$(NAME) built for Linux.$(RESET)"
 
-# Build universal lib (macOS) with proper per-arch compilation
-universal: fclean
-	@echo "$(YELLOW)Building universal libft for macOS...$(RESET)"
-	@for arch in $(ARCHS); do \
-		$(MAKE) $(OBJS) CFLAGS="$(CFLAGS) -arch $$arch"; \
-		ar -rsc libft_$$arch.a $(OBJS); \
-		rm -f $(OBJS); \
-	done
-	@lipo -create $(foreach a,$(ARCHS),libft_$(a).a) -output $(NAME)
-	@rm -f $(foreach a,$(ARCHS),libft_$(a).a)
-	@echo "$(GREEN)$(NAME) universal created!$(RESET)"
-
 clean:
 	@echo "$(YELLOW)Cleaning object files...$(RESET)"
 	@rm -f $(OBJS)
 	@echo "$(GREEN)Clean complete.$(RESET)"
 
 fclean: clean
-	@echo "$(YELLOW)Removing static libraries...$(RESET)"
-	@rm -f libft.a libft_*.a
+	@echo "$(YELLOW)Removing static library...$(RESET)"
+	@rm -f $(NAME)
 	@echo "$(GREEN)Full clean complete.$(RESET)"
 
 re: fclean all
 
-.PHONY: all clean fclean re universal linux
+.PHONY: all clean fclean re linux

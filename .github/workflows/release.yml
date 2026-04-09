@@ -1,6 +1,7 @@
-name: Build and Release
+name: CI/CD
 
 on:
+  pull_request:
   push:
     branches: [main]
 
@@ -9,37 +10,32 @@ permissions:
 
 jobs:
   build-linux:
+    name: Build Linux library
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build libft Linux
-        run: make fclean linux
+      - name: Build libft
+        run: make re
 
-      - name: Create Linux Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v1.0.${{ github.run_number }}-linux
-          name: Release v1.0.${{ github.run_number }}-linux
-          files: |
-            libft.a
-            includes/libft.h
-
-  build-macos:
-    runs-on: macos-latest
+  release-linux:
+    name: Publish Linux release
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build-linux
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build libft macOS universal
-        run: make fclean universal
+      - name: Build release artifact
+        run: make re
 
-      - name: Create macOS Release
+      - name: Create Linux release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v1.0.${{ github.run_number }}-mac
-          name: Release v1.0.${{ github.run_number }}-mac
+          tag_name: v1.0.${{ github.run_number }}-linux
+          name: Release v1.0.${{ github.run_number }}-linux
           files: |
             libft.a
             includes/libft.h

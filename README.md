@@ -1,50 +1,45 @@
+*This project has been created as part of the 42 curriculum by lmouta-g.*
+
+---
+
 ## Description
 
-> [!NOTE]
-> This libft is **not** the minimal version required for the 42 project.
+**libft** is a custom C library project from the 42 curriculum.
+The goal is to rebuild a set of standard C library functions, along with additional utility functions that can be reused in future projects.
 
-This is an **extended** version that I develop and maintain to support my future projects.
+This library includes string manipulation, memory handling, character checks, linked list utilities, file descriptor output helpers, `get_next_line`, and `ft_printf`.
 
-### Content
-
-| Category | Description |
-|----------|-------------|
-| **Mandatory** | Base functions from libft project |
-| **Bonus** | Linked list manipulation |
-| **Extras** | Personal additions (`ft_isspace`, etc.) |
+This project introduces low-level memory management, pointer manipulation, linked lists, variadic functions, and general C library design.
 
 ---
 
-## Structure
+## Instructions
 
-```
-libft/
-├── includes/
-│   └── libft.h
-├── src/
-│   └── *.c
-├── Makefile
-└── README.md
-```
-
----
-
-## Compilation
+### Compilation
 
 ```bash
-make        # Build the library
-make clean  # Remove object files
-make fclean # Remove everything
-make re     # Rebuild
+make
 ```
 
----
+This generates one static library:
 
-## Usage
+* `libft.a`
+
+### Usage
+
+1. Build the library:
+
+```bash
+make
+```
+
+2. Include the header in your project:
 
 ```c
 #include "libft.h"
 ```
+
+3. Compile your program with the library:
 
 ```bash
 cc main.c -L. -lft -I includes
@@ -52,18 +47,21 @@ cc main.c -L. -lft -I includes
 
 ---
 
-## Warning
+## Structure
 
-> [!CAUTION]
-> **If you are a 42 student:**
-> - **Do not copy** this code
-> - Take time to **understand** each function
-> - **Write your own code**
->
-> The purpose of the libft project is to learn. Copying deprives you of this learning and you will be stuck on future projects.
+The source files are organized by category:
+
+* `src/ctype`
+* `src/stdlib`
+* `src/string`
+* `src/memory`
+* `src/io`
+* `src/list`
+* `src/printf`
+* `src/extra`
 
 ---
 
-## License
+## Resources
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+- I don't remember using any specific resources for this project. I think I mostly searched online and read 42 PDFs :D
